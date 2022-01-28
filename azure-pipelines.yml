@@ -1,0 +1,32 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- master
+
+resources:
+- repo: self
+
+variables:
+  # Agent VM image name
+  vmImageName: 'ubuntu-latest'
+
+stages:
+- stage: Deploy
+  displayName: Deploy stage
+  jobs:
+  - job: Deploy
+    displayName: Deploy
+    pool:
+      vmImage: $(vmImageName)
+    steps:
+    - task: KubernetesManifest@0
+      displayName: Deploy
+      inputs:
+        kubernetesServiceConnection: k8s-demo1985
+        namespace: demo
+        manifests: |
+          ubuntu.yaml
+          nginx.yaml
