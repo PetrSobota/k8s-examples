@@ -13,7 +13,7 @@ variables:
   # Container registry service connection established during pipeline creation
   dockerRegistryServiceConnection: '36a19b79-1aab-4594-8dc3-dfda8383456d'
   imageRepository: 'dockersamplenginx'
-  containerRegistry: 'demo1555.azurecr.io'
+  containerRegistry: 'demo1985.azurecr.io'
   dockerfilePath: '**/Dockerfile'
   tag: '$(Build.BuildId)'
   imagePullSecret: 'demo15551478cc91-auth'
@@ -39,8 +39,8 @@ stages:
     - task: KubernetesManifest@0
       displayName: Deploy
       inputs:
-        kubernetesServiceConnection: k8s-demo
-        namespace: test2
+        kubernetesServiceConnection: k8s-demo1985
+        namespace: demo
         manifests: |
           ubuntu.yaml
           nginx.yaml
